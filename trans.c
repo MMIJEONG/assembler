@@ -7,6 +7,7 @@ int instr_trans(char *op, char *args, char* mcode)
 	// check syntax 
 	if(!is_valid(op, args)){
 		printf("Error: %s %s is not valid\n", op, args);
+		strcpy(mcode, "error");
 		return 0;
 	}
 
@@ -14,7 +15,7 @@ int instr_trans(char *op, char *args, char* mcode)
 	strcpy(mcode, "AB CD EF");
 	term = args[0];
 	if(term == '(')
-		return "8b;	
+		strcpy(mcode, "8b");	
 	for(i = 1 ; i < strlen(args) ; i++)
 	{
 		if(args[i]==',')
@@ -22,43 +23,46 @@ int instr_trans(char *op, char *args, char* mcode)
 			if(term == '%')
 			{
 				if(args[i+1] == '%')
-					return "89";
+					strcpy(mcode, "89");
 				else if(args[i+1] == '0')
-					return "a3";
+					strcpy(mcode, "a3");
+			}
+			else if(term=='-')
+			{
+				if(args[i+1]=='%')
+					strcpy(mcode, "8b");
 			}
 			else if(term=='0')
 			{
-				if(args[i-1]==')')
-					return "8b";
-				else if(args[i+1]=='%')
-					return "a1";
+				if(args[i+1]=='%')
+					strcpy(mcode, "a1");
 			}
 			else if(term=='$')
 			{			
 				if(args[i+3]=='a')
-					return "b8";
+					strcpy(mcode, "b8");
 				else if(args[i+3]=='c')
-					return "b9";
+					strcpy(mcode, "b9");
 				else if(args[i+3]=='d')
 				{
-					if(args[a+4]=='x')
-						return "ba";
-					else if(args[a+4]=='i')
-						return "bf";
+					if(args[i+4]=='x')
+						strcpy(mcode, "ba");
+					else if(args[i+4]=='i')
+						strcpy(mcode, "bf");
 					}
 				else if(args[i+3]=='b')
 				{
-					if(args[a+4]=='x')
-						return "bb";
-					else if(args[a+4]=='p')
-						return "bd";
+					if(args[i+4]=='x')
+						strcpy(mcode, "bb");
+					else if(args[i+4]=='p')
+						strcpy(mcode, "bd");
 				}
 				else if(args[i+3]=='s')
 				{
-					if(args[a+4]=='p')
-					return "bc";
-					else if(args[a+4]=='i')
-						return "be";
+					if(args[i+4]=='p')
+						strcpy(mcode, "bc");
+					else if(args[i+4]=='i')
+						strcpy(mcode, "be");
 				}	
 			}
 		}	
