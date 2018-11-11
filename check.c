@@ -1,5 +1,4 @@
 #include "myas.h"
-#include <string.h>
 
 int is_valid(char *op, char *args)
 {

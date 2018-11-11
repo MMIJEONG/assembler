@@ -3,3 +3,4 @@
 #include<stdlib.h>
 
 // complete this header file
+int is_valid(char *op, char *args);
