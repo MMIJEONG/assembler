@@ -30,6 +30,10 @@ int instr_trans(char *op, char *args, char* mcode)
 					strcpy(mcode, "89");
 				else if(args[i+1] == '0')
 					strcpy(mcode, "a3");
+				else if(args[i+1] == '(')
+					strcpy(mcode,"a3");
+				else if(args[i+1]=='-')
+					strcpy(mcode,"a3");
 			}
 			else if(term=='0')
 			{

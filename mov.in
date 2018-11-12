@@ -3,6 +3,7 @@ mov (%esp),%ebx
 mov %eax,0x8049f10
 mov %esp,%ecx
 mov -0x4(%ebx),%eax
+mov 0x4(%ebx),%eax
 mov $0x0,%eax
 mov $0x0,%esp
 mov $0x1,%ebp
@@ -15,3 +16,8 @@ mov $0x804a01f,$0x804a01f
 mov -0x4(%ebx),$0x804a01f
 mov %eax,$0x804a01f
 mov 0x8(%esp),0x4(%esp)
+mov 0x8049f10,0x8049f10
+mov (%esp),(%ebx)
+mov %eax,(%ebx)
+mov %eax,-0x4(%ebx)
+mov %eax,0x4(%ebx)
