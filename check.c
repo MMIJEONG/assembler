@@ -14,6 +14,10 @@ int is_valid(char *op, char *args)
 				c++;
 				break;
 			}
+			if(args[i+1]=='$')
+			{
+				return 0;
+			}
 		}
 	}
 	if(c>=1)

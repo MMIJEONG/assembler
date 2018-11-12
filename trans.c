@@ -2,7 +2,7 @@
 
 int instr_trans(char *op, char *args, char* mcode)
 {
-	int i,n;
+	int i,n,count=0;
 	char term;
 	// check syntax 
 	if(!is_valid(op, args)){
@@ -18,19 +18,18 @@ int instr_trans(char *op, char *args, char* mcode)
 		strcpy(mcode, "8b");	
 	for(i = 1 ; i < strlen(args) ; i++)
 	{
+		if(args[i]=='(')
+			count++;	
 		if(args[i]==',')
 		{
-			if(term == '%')
+			if(count!=0)
+				strcpy(mcode,"8b");			
+			else if(term == '%')
 			{
 				if(args[i+1] == '%')
 					strcpy(mcode, "89");
 				else if(args[i+1] == '0')
 					strcpy(mcode, "a3");
-			}
-			else if(term=='-')
-			{
-				if(args[i+1]=='%')
-					strcpy(mcode, "8b");
 			}
 			else if(term=='0')
 			{
